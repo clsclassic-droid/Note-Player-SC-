@@ -1,6 +1,6 @@
 const CONFIG = {
   // Paste the Google Apps Script Web App URL here after deploying it (see README.md).
-  APPS_SCRIPT_URL: "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE",
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbyuylNiJxyLfByxoX28HdiDJGQyTRq6Dk4RKOSMbO2Ae7YsEGcrWDtMEREKXzSItG30Vw/exec",
   // SHA-256 hash of the gate password. Default password is "noteplayer2026".
   // To change it, see the instructions in README.md.
   PASSWORD_HASH: "6e4b0e55f212666c6d78a200d8a83d66a74439f3083d2f955c30352ee75040e3",
