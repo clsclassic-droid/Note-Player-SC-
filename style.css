@@ -1,13 +1,14 @@
 :root {
-  --bg: #0f1420;
-  --card-bg: #1a2233;
-  --text: #e8ecf4;
-  --muted: #8a93a6;
-  --accent: #4f8cff;
-  --accent-hover: #3a75e6;
-  --error: #ff6b6b;
-  --success: #4fd18b;
-  --border: #2a3448;
+  --bg: #ece3cd;
+  --card-bg: #f8f2e2;
+  --ink: #171410;
+  --ink-muted: #5c5647;
+  --accent: #171410;
+  --accent-hover: #000000;
+  --error: #7a1f1f;
+  --success: #1f4d2e;
+  --line: rgba(23, 20, 16, 0.35);
+  --line-faint: rgba(23, 20, 16, 0.15);
 }
 
 * {
@@ -17,9 +18,13 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Segoe UI", "Noto Sans Thai", system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family: "Noto Serif Thai", Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(23, 20, 16, 0.05), transparent 40%),
+    radial-gradient(circle at 85% 70%, rgba(23, 20, 16, 0.05), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(23, 20, 16, 0.02) 0px, rgba(23, 20, 16, 0.02) 1px, transparent 1px, transparent 3px);
 }
 
 .hidden {
@@ -39,11 +44,12 @@ body {
 
 .card {
   background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--line-faint);
+  border-radius: 2px;
   padding: 20px;
   margin: 0 auto 16px;
   max-width: 640px;
+  box-shadow: 0 1px 0 rgba(23, 20, 16, 0.06), 0 10px 24px rgba(23, 20, 16, 0.12);
 }
 
 #gate .card {
@@ -55,6 +61,7 @@ body {
 h1 {
   margin: 0 0 8px;
   font-size: 1.5rem;
+  letter-spacing: 0.02em;
 }
 
 h2 {
@@ -81,56 +88,72 @@ header h1 {
 }
 
 .nav-links a {
-  color: var(--text);
+  color: var(--ink);
   text-decoration: none;
   font-size: 0.9rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
   padding: 10px 16px;
 }
 
 .nav-links a:hover {
-  border-color: var(--accent);
+  background: var(--ink);
+  color: var(--card-bg);
 }
 
 input, select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 8px 4px;
   margin-top: 6px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: #10182a;
-  color: var(--text);
+  border: none;
+  border-bottom: 2px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
   font-size: 1rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-bottom-color: var(--ink);
 }
 
 label {
   display: block;
   margin-bottom: 14px;
   font-size: 0.9rem;
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 button {
   cursor: pointer;
-  border: none;
-  border-radius: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
   padding: 10px 16px;
-  background: var(--accent);
-  color: white;
+  background: var(--ink);
+  color: var(--card-bg);
+  font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 button:hover {
   background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 #logout, #refresh-btn {
   background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
+  border: 1px solid var(--line);
+  color: var(--ink);
   font-weight: 400;
+}
+
+#logout:hover, #refresh-btn:hover {
+  background: var(--ink);
+  color: var(--card-bg);
 }
 
 #gate-password {
@@ -175,16 +198,17 @@ table {
 th, td {
   text-align: left;
   padding: 8px 10px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line-faint);
   white-space: nowrap;
 }
 
 th {
-  color: var(--muted);
-  font-weight: 600;
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom: 2px solid var(--ink);
 }
 
 .empty {
-  color: var(--muted);
+  color: var(--ink-muted);
   text-align: center;
 }
