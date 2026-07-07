@@ -36,11 +36,17 @@
 
     <form id="record-form" class="card">
       <label>
-        ชื่อ (Player)
+        <span class="label-text">
+          <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+          ชื่อ (Player)
+        </span>
         <input type="text" id="player" required>
       </label>
       <label>
-        เผ่า (Race)
+        <span class="label-text">
+          <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18"/><path d="M5 4h11l-2 4 2 4H5"/></svg>
+          เผ่า (Race)
+        </span>
         <select id="race" required>
           <option value="" disabled selected>เลือกเผ่า</option>
           <option value="Terran">Terran</option>
@@ -49,11 +55,17 @@
         </select>
       </label>
       <label>
-        กลยุทธ์ (Strategy)
+        <span class="label-text">
+          <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.8"/></svg>
+          กลยุทธ์ (Strategy)
+        </span>
         <input type="text" id="strategy" required>
       </label>
       <label>
-        มารยาท (Manner)
+        <span class="label-text">
+          <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9z"/></svg>
+          มารยาท (Manner)
+        </span>
         <input type="text" id="manner" required>
       </label>
       <button type="submit" id="submit-btn">บันทึกข้อมูล</button>
