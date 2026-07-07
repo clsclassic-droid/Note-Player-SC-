@@ -21,7 +21,10 @@
   <section id="app" class="screen hidden">
     <header>
       <h1>Note Player SC</h1>
-      <button id="logout">ออกจากระบบ</button>
+      <nav class="nav-links">
+        <a href="records.html">รายการที่บันทึกไว้</a>
+        <button id="logout">ออกจากระบบ</button>
+      </nav>
     </header>
 
     <form id="record-form" class="card">
@@ -49,29 +52,6 @@
       <button type="submit" id="submit-btn">บันทึกข้อมูล</button>
       <p id="form-status" class="status hidden"></p>
     </form>
-
-    <div class="card">
-      <div class="table-header">
-        <h2>รายการที่บันทึกไว้</h2>
-        <button id="refresh-btn">รีเฟรช</button>
-      </div>
-      <div class="table-wrap">
-        <table id="records-table">
-          <thead>
-            <tr>
-              <th>เวลา</th>
-              <th>ชื่อ</th>
-              <th>เผ่า</th>
-              <th>กลยุทธ์</th>
-              <th>มารยาท</th>
-            </tr>
-          </thead>
-          <tbody id="records-body">
-            <tr><td colspan="5" class="empty">ยังไม่มีข้อมูล</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </section>
 
   <script src="app.js"></script>

@@ -16,6 +16,8 @@ const refreshBtn = document.getElementById("refresh-btn");
 const form = document.getElementById("record-form");
 const formStatus = document.getElementById("form-status");
 const recordsBody = document.getElementById("records-body");
+const hasForm = Boolean(form);
+const hasRecordsTable = Boolean(recordsBody);
 
 async function sha256(text) {
   const data = new TextEncoder().encode(text);
@@ -28,7 +30,7 @@ async function sha256(text) {
 function showApp() {
   gateScreen.classList.add("hidden");
   appScreen.classList.remove("hidden");
-  loadRecords();
+  if (hasRecordsTable) loadRecords();
 }
 
 function showGate() {
@@ -95,7 +97,7 @@ function escapeHtml(value) {
 }
 
 async function loadRecords() {
-  if (!isConfigured()) return;
+  if (!hasRecordsTable || !isConfigured()) return;
   try {
     const res = await fetch(CONFIG.APPS_SCRIPT_URL);
     const data = await res.json();
@@ -109,49 +111,52 @@ function isConfigured() {
   return CONFIG.APPS_SCRIPT_URL && !CONFIG.APPS_SCRIPT_URL.startsWith("PASTE_YOUR");
 }
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+if (hasForm) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  if (!isConfigured()) {
-    setStatus("ยังไม่ได้ตั้งค่า APPS_SCRIPT_URL ใน app.js (ดู README.md)", "error");
-    return;
-  }
-
-  const player = document.getElementById("player").value.trim();
-  const race = document.getElementById("race").value.trim();
-  const strategy = document.getElementById("strategy").value.trim();
-  const manner = document.getElementById("manner").value.trim();
-
-  if (!player || !race || !strategy || !manner) {
-    setStatus("กรุณากรอกข้อมูลให้ครบทุกช่อง", "error");
-    return;
-  }
-
-  const submitBtn = document.getElementById("submit-btn");
-  submitBtn.disabled = true;
-  setStatus("กำลังบันทึก...", "");
-
-  try {
-    const res = await fetch(CONFIG.APPS_SCRIPT_URL, {
-      method: "POST",
-      body: new URLSearchParams({ player, race, strategy, manner }),
-    });
-    const result = await res.json();
-    if (result.result === "success") {
-      form.reset();
-      setStatus("บันทึกข้อมูลสำเร็จ", "ok");
-      loadRecords();
-    } else {
-      setStatus("บันทึกไม่สำเร็จ กรุณาลองใหม่", "error");
+    if (!isConfigured()) {
+      setStatus("ยังไม่ได้ตั้งค่า APPS_SCRIPT_URL ใน app.js (ดู README.md)", "error");
+      return;
     }
-  } catch (err) {
-    setStatus("เกิดข้อผิดพลาด กรุณาลองใหม่", "error");
-  } finally {
-    submitBtn.disabled = false;
-  }
-});
 
-refreshBtn.addEventListener("click", loadRecords);
+    const player = document.getElementById("player").value.trim();
+    const race = document.getElementById("race").value.trim();
+    const strategy = document.getElementById("strategy").value.trim();
+    const manner = document.getElementById("manner").value.trim();
+
+    if (!player || !race || !strategy || !manner) {
+      setStatus("กรุณากรอกข้อมูลให้ครบทุกช่อง", "error");
+      return;
+    }
+
+    const submitBtn = document.getElementById("submit-btn");
+    submitBtn.disabled = true;
+    setStatus("กำลังบันทึก...", "");
+
+    try {
+      const res = await fetch(CONFIG.APPS_SCRIPT_URL, {
+        method: "POST",
+        body: new URLSearchParams({ player, race, strategy, manner }),
+      });
+      const result = await res.json();
+      if (result.result === "success") {
+        form.reset();
+        setStatus("บันทึกข้อมูลสำเร็จ", "ok");
+      } else {
+        setStatus("บันทึกไม่สำเร็จ กรุณาลองใหม่", "error");
+      }
+    } catch (err) {
+      setStatus("เกิดข้อผิดพลาด กรุณาลองใหม่", "error");
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+}
+
+if (refreshBtn) {
+  refreshBtn.addEventListener("click", loadRecords);
+}
 
 if (sessionStorage.getItem("np_unlocked") === "1") {
   showApp();

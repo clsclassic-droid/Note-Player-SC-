@@ -74,6 +74,25 @@ header h1 {
   margin: 0;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+
+.nav-links a:hover {
+  border-color: var(--accent);
+}
+
 input, select {
   width: 100%;
   padding: 10px 12px;

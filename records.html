@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รายการที่บันทึกไว้ - Note Player SC</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section id="gate" class="screen">
+    <div class="card">
+      <h1>Note Player SC</h1>
+      <p>กรุณาใส่รหัสผ่านเพื่อเข้าใช้งาน</p>
+      <input type="password" id="gate-password" placeholder="รหัสผ่าน" autocomplete="off">
+      <button id="gate-submit">เข้าสู่ระบบ</button>
+      <p id="gate-error" class="error hidden">รหัสผ่านไม่ถูกต้อง</p>
+    </div>
+  </section>
+
+  <section id="app" class="screen hidden">
+    <header>
+      <h1>รายการที่บันทึกไว้</h1>
+      <nav class="nav-links">
+        <a href="index.html">กรอกข้อมูลใหม่</a>
+        <button id="logout">ออกจากระบบ</button>
+      </nav>
+    </header>
+
+    <div class="card">
+      <div class="table-header">
+        <h2>รายการที่บันทึกไว้</h2>
+        <button id="refresh-btn">รีเฟรช</button>
+      </div>
+      <div class="table-wrap">
+        <table id="records-table">
+          <thead>
+            <tr>
+              <th>เวลา</th>
+              <th>ชื่อ</th>
+              <th>เผ่า</th>
+              <th>กลยุทธ์</th>
+              <th>มารยาท</th>
+            </tr>
+          </thead>
+          <tbody id="records-body">
+            <tr><td colspan="5" class="empty">ยังไม่มีข้อมูล</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
