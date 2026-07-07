@@ -6,13 +6,23 @@
 <title>รายการที่บันทึกไว้ - Note Player SC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <section id="gate" class="screen">
     <div class="card">
+      <svg class="mascot" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="115" rx="70" ry="65" fill="var(--accent)"/>
+        <ellipse cx="35" cy="140" rx="14" ry="20" fill="var(--accent)" transform="rotate(-20 35 140)"/>
+        <ellipse cx="165" cy="140" rx="14" ry="20" fill="var(--accent)" transform="rotate(20 165 140)"/>
+        <circle cx="60" cy="128" r="11" fill="var(--accent-soft)"/>
+        <circle cx="140" cy="128" r="11" fill="var(--accent-soft)"/>
+        <circle cx="75" cy="105" r="8" fill="var(--ink)"/>
+        <circle cx="125" cy="105" r="8" fill="var(--ink)"/>
+        <path d="M75 128 Q100 148 125 128" stroke="var(--ink)" stroke-width="6" fill="none" stroke-linecap="round"/>
+      </svg>
       <h1>Note Player SC</h1>
       <p>กรุณาใส่รหัสผ่านเพื่อเข้าใช้งาน</p>
       <input type="password" id="gate-password" placeholder="รหัสผ่าน" autocomplete="off">
@@ -23,7 +33,19 @@
 
   <section id="app" class="screen hidden">
     <header>
-      <h1>รายการที่บันทึกไว้</h1>
+      <div class="brand">
+        <svg class="mascot mascot-small" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="115" rx="70" ry="65" fill="var(--accent)"/>
+          <ellipse cx="35" cy="140" rx="14" ry="20" fill="var(--accent)" transform="rotate(-20 35 140)"/>
+          <ellipse cx="165" cy="140" rx="14" ry="20" fill="var(--accent)" transform="rotate(20 165 140)"/>
+          <circle cx="60" cy="128" r="11" fill="var(--accent-soft)"/>
+          <circle cx="140" cy="128" r="11" fill="var(--accent-soft)"/>
+          <circle cx="75" cy="105" r="8" fill="var(--ink)"/>
+          <circle cx="125" cy="105" r="8" fill="var(--ink)"/>
+          <path d="M75 128 Q100 148 125 128" stroke="var(--ink)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h1>รายการที่บันทึกไว้</h1>
+      </div>
       <nav class="nav-links">
         <a href="index.html">กรอกข้อมูลใหม่</a>
         <button id="logout">ออกจากระบบ</button>

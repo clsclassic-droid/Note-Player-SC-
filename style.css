@@ -1,14 +1,15 @@
 :root {
-  --bg: #ece3cd;
-  --card-bg: #f8f2e2;
-  --ink: #171410;
-  --ink-muted: #5c5647;
-  --accent: #171410;
-  --accent-hover: #000000;
-  --error: #7a1f1f;
-  --success: #1f4d2e;
-  --line: rgba(23, 20, 16, 0.35);
-  --line-faint: rgba(23, 20, 16, 0.15);
+  --bg: #f0eee6;
+  --card-bg: #ffffff;
+  --ink: #2b2620;
+  --ink-muted: #7a7267;
+  --accent: #d97757;
+  --accent-soft: #f2c4ac;
+  --accent-hover: #c1613f;
+  --error: #b3441f;
+  --success: #2f6b45;
+  --line: rgba(43, 38, 32, 0.14);
+  --line-faint: rgba(43, 38, 32, 0.08);
 }
 
 * {
@@ -18,13 +19,9 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Noto Serif Thai", Georgia, "Times New Roman", serif;
+  font-family: "Mitr", "Segoe UI", system-ui, sans-serif;
   color: var(--ink);
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(circle at 15% 20%, rgba(23, 20, 16, 0.05), transparent 40%),
-    radial-gradient(circle at 85% 70%, rgba(23, 20, 16, 0.05), transparent 45%),
-    repeating-linear-gradient(0deg, rgba(23, 20, 16, 0.02) 0px, rgba(23, 20, 16, 0.02) 1px, transparent 1px, transparent 3px);
+  background: var(--bg);
 }
 
 .hidden {
@@ -42,14 +39,34 @@ body {
   justify-content: center;
 }
 
+.mascot {
+  display: block;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 12px;
+}
+
+.mascot-small {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .card {
   background: var(--card-bg);
   border: 1px solid var(--line-faint);
-  border-radius: 2px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 24px;
   margin: 0 auto 16px;
   max-width: 640px;
-  box-shadow: 0 1px 0 rgba(23, 20, 16, 0.06), 0 10px 24px rgba(23, 20, 16, 0.12);
+  box-shadow: 0 1px 2px rgba(43, 38, 32, 0.04), 0 12px 28px rgba(43, 38, 32, 0.08);
 }
 
 #gate .card {
@@ -61,12 +78,13 @@ body {
 h1 {
   margin: 0 0 8px;
   font-size: 1.5rem;
-  letter-spacing: 0.02em;
+  font-weight: 600;
 }
 
 h2 {
   margin: 0;
   font-size: 1.1rem;
+  font-weight: 600;
 }
 
 header {
@@ -84,7 +102,7 @@ header h1 {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .nav-links a {
@@ -92,23 +110,24 @@ header h1 {
   text-decoration: none;
   font-size: 0.9rem;
   border: 1px solid var(--line);
-  border-radius: 2px;
-  padding: 10px 16px;
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: var(--card-bg);
 }
 
 .nav-links a:hover {
-  background: var(--ink);
-  color: var(--card-bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
 }
 
 input, select {
   width: 100%;
-  padding: 8px 4px;
+  padding: 10px 14px;
   margin-top: 6px;
-  border: none;
-  border-bottom: 2px solid var(--line);
-  border-radius: 0;
-  background: transparent;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
   color: var(--ink);
   font-family: inherit;
   font-size: 1rem;
@@ -116,7 +135,7 @@ input, select {
 
 input:focus, select:focus {
   outline: none;
-  border-bottom-color: var(--ink);
+  border-color: var(--accent);
 }
 
 label {
@@ -128,32 +147,31 @@ label {
 
 button {
   cursor: pointer;
-  border: 2px solid var(--ink);
-  border-radius: 2px;
-  padding: 10px 16px;
-  background: var(--ink);
-  color: var(--card-bg);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #fff;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
 }
 
 button:hover {
   background: var(--accent-hover);
-  border-color: var(--accent-hover);
 }
 
 #logout, #refresh-btn {
-  background: transparent;
+  background: var(--card-bg);
   border: 1px solid var(--line);
   color: var(--ink);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 #logout:hover, #refresh-btn:hover {
-  background: var(--ink);
-  color: var(--card-bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
 }
 
 #gate-password {
@@ -197,15 +215,14 @@ table {
 
 th, td {
   text-align: left;
-  padding: 8px 10px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--line-faint);
   white-space: nowrap;
 }
 
 th {
-  color: var(--ink);
-  font-weight: 700;
-  border-bottom: 2px solid var(--ink);
+  color: var(--ink-muted);
+  font-weight: 600;
 }
 
 .empty {
