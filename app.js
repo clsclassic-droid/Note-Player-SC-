@@ -74,7 +74,7 @@ function renderRecords(records) {
   }
   recordsBody.innerHTML = records
     .map((r) => {
-      const time = r.timestamp ? new Date(r.timestamp).toLocaleString("th-TH") : "";
+      const time = r.timestamp ? new Date(r.timestamp).toLocaleDateString("th-TH") : "";
       return `<tr>
         <td>${escapeHtml(time)}</td>
         <td>${escapeHtml(r.player)}</td>
