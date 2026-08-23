@@ -16,8 +16,6 @@ const refreshBtn = document.getElementById("refresh-btn");
 const form = document.getElementById("record-form");
 const formStatus = document.getElementById("form-status");
 const recordsBody = document.getElementById("records-body");
-const filterDateFrom = document.getElementById("filter-date-from");
-const filterDateTo = document.getElementById("filter-date-to");
 const filterPlayer = document.getElementById("filter-player");
 const filterRace = document.getElementById("filter-race");
 const filterClearBtn = document.getElementById("filter-clear");
@@ -118,17 +116,10 @@ async function loadRecords() {
 }
 
 function applyFilters() {
-  const dateFrom = filterDateFrom.value;
-  const dateTo = filterDateTo.value;
   const playerQuery = filterPlayer.value.trim().toLowerCase();
   const raceQuery = filterRace.value;
 
   const filtered = allRecords.filter((r) => {
-    if (r.timestamp) {
-      const recordDate = new Date(r.timestamp);
-      if (dateFrom && recordDate < new Date(dateFrom + "T00:00:00")) return false;
-      if (dateTo && recordDate > new Date(dateTo + "T23:59:59")) return false;
-    }
     if (playerQuery && !String(r.player ?? "").toLowerCase().includes(playerQuery)) return false;
     if (raceQuery && r.race !== raceQuery) return false;
     return true;
@@ -214,14 +205,10 @@ if (refreshBtn) {
 }
 
 if (hasRecordsTable) {
-  [filterDateFrom, filterDateTo, filterRace].forEach((el) => {
-    el.addEventListener("change", applyFilters);
-  });
+  filterRace.addEventListener("change", applyFilters);
   filterPlayer.addEventListener("input", applyFilters);
 
   filterClearBtn.addEventListener("click", () => {
-    filterDateFrom.value = "";
-    filterDateTo.value = "";
     filterPlayer.value = "";
     filterRace.value = "";
     applyFilters();

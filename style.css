@@ -291,7 +291,12 @@ button:hover {
   margin-top: 0;
 }
 
+.filter-field-button {
+  flex: 0 1 160px;
+}
+
 .filter-bar #filter-clear {
+  width: 100%;
   background: var(--card-bg);
   border: 1px solid var(--line);
   color: var(--ink);
