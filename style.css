@@ -259,6 +259,52 @@ button:hover {
   margin-bottom: 14px;
 }
 
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 14px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-1);
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 140px;
+  flex: 1 1 140px;
+}
+
+.filter-label {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.filter-field input,
+.filter-field select {
+  margin-top: 0;
+}
+
+.filter-bar #filter-clear {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 500;
+  padding: 11px 16px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.filter-bar #filter-clear:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .table-wrap {
   overflow-x: auto;
   border-radius: 12px;

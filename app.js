@@ -16,8 +16,14 @@ const refreshBtn = document.getElementById("refresh-btn");
 const form = document.getElementById("record-form");
 const formStatus = document.getElementById("form-status");
 const recordsBody = document.getElementById("records-body");
+const filterDateFrom = document.getElementById("filter-date-from");
+const filterDateTo = document.getElementById("filter-date-to");
+const filterPlayer = document.getElementById("filter-player");
+const filterRace = document.getElementById("filter-race");
+const filterClearBtn = document.getElementById("filter-clear");
 const hasForm = Boolean(form);
 const hasRecordsTable = Boolean(recordsBody);
+let allRecords = [];
 
 async function sha256(text) {
   const data = new TextEncoder().encode(text);
@@ -67,9 +73,9 @@ function setStatus(message, type) {
   formStatus.classList.remove("hidden");
 }
 
-function renderRecords(records) {
+function renderRecords(records, emptyMessage) {
   if (!records || records.length === 0) {
-    recordsBody.innerHTML = '<tr><td colspan="5" class="empty">ยังไม่มีข้อมูล</td></tr>';
+    recordsBody.innerHTML = `<tr><td colspan="5" class="empty">${escapeHtml(emptyMessage || "ยังไม่มีข้อมูล")}</td></tr>`;
     return;
   }
   recordsBody.innerHTML = records
@@ -101,10 +107,32 @@ async function loadRecords() {
   try {
     const res = await fetch(CONFIG.APPS_SCRIPT_URL);
     const data = await res.json();
-    renderRecords(data);
+    allRecords = data || [];
+    applyFilters();
   } catch (err) {
     recordsBody.innerHTML = '<tr><td colspan="5" class="empty">โหลดข้อมูลไม่สำเร็จ</td></tr>';
   }
+}
+
+function applyFilters() {
+  const dateFrom = filterDateFrom.value;
+  const dateTo = filterDateTo.value;
+  const playerQuery = filterPlayer.value.trim().toLowerCase();
+  const raceQuery = filterRace.value;
+
+  const filtered = allRecords.filter((r) => {
+    if (r.timestamp) {
+      const recordDate = new Date(r.timestamp);
+      if (dateFrom && recordDate < new Date(dateFrom + "T00:00:00")) return false;
+      if (dateTo && recordDate > new Date(dateTo + "T23:59:59")) return false;
+    }
+    if (playerQuery && !String(r.player ?? "").toLowerCase().includes(playerQuery)) return false;
+    if (raceQuery && r.race !== raceQuery) return false;
+    return true;
+  });
+
+  const emptyMessage = allRecords.length > 0 ? "ไม่พบข้อมูลที่ตรงกับตัวกรอง" : "ยังไม่มีข้อมูล";
+  renderRecords(filtered, emptyMessage);
 }
 
 function isConfigured() {
@@ -156,6 +184,21 @@ if (hasForm) {
 
 if (refreshBtn) {
   refreshBtn.addEventListener("click", loadRecords);
+}
+
+if (hasRecordsTable) {
+  [filterDateFrom, filterDateTo, filterRace].forEach((el) => {
+    el.addEventListener("change", applyFilters);
+  });
+  filterPlayer.addEventListener("input", applyFilters);
+
+  filterClearBtn.addEventListener("click", () => {
+    filterDateFrom.value = "";
+    filterDateTo.value = "";
+    filterPlayer.value = "";
+    filterRace.value = "";
+    applyFilters();
+  });
 }
 
 if (sessionStorage.getItem("np_unlocked") === "1") {

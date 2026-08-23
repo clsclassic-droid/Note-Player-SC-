@@ -39,6 +39,30 @@
         <h2>รายการที่บันทึกไว้</h2>
         <button id="refresh-btn">รีเฟรช</button>
       </div>
+      <div class="filter-bar">
+        <label class="filter-field">
+          <span class="filter-label">เวลา (จาก)</span>
+          <input type="date" id="filter-date-from">
+        </label>
+        <label class="filter-field">
+          <span class="filter-label">เวลา (ถึง)</span>
+          <input type="date" id="filter-date-to">
+        </label>
+        <label class="filter-field">
+          <span class="filter-label">ชื่อ</span>
+          <input type="text" id="filter-player" placeholder="ค้นหาชื่อ">
+        </label>
+        <label class="filter-field">
+          <span class="filter-label">เผ่า</span>
+          <select id="filter-race">
+            <option value="">ทั้งหมด</option>
+            <option value="Terran">Terran</option>
+            <option value="Protoss">Protoss</option>
+            <option value="Zerg">Zerg</option>
+          </select>
+        </label>
+        <button type="button" id="filter-clear">ล้างตัวกรอง</button>
+      </div>
       <div class="table-wrap">
         <table id="records-table">
           <thead>
