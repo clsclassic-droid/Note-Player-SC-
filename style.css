@@ -262,7 +262,7 @@ button:hover {
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 12px;
   padding: 14px;
   margin-bottom: 16px;
