@@ -346,6 +346,41 @@ th {
   background: var(--card-bg);
 }
 
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable:hover {
+  color: var(--accent);
+}
+
+th.sortable .th-text {
+  gap: 6px;
+}
+
+.sort-icon {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 5px solid var(--line-strong);
+  opacity: 0.6;
+}
+
+th.sort-desc .sort-icon {
+  border-bottom: none;
+  border-top: 5px solid var(--accent);
+  opacity: 1;
+}
+
+th.sort-asc .sort-icon {
+  border-bottom: 5px solid var(--accent);
+  opacity: 1;
+}
+
 tbody tr:last-child td {
   border-bottom: none;
 }

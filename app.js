@@ -21,9 +21,12 @@ const filterDateTo = document.getElementById("filter-date-to");
 const filterPlayer = document.getElementById("filter-player");
 const filterRace = document.getElementById("filter-race");
 const filterClearBtn = document.getElementById("filter-clear");
+const sortableHeaders = document.querySelectorAll("th.sortable");
 const hasForm = Boolean(form);
 const hasRecordsTable = Boolean(recordsBody);
 let allRecords = [];
+let sortKey = null;
+let sortDirection = "asc";
 
 async function sha256(text) {
   const data = new TextEncoder().encode(text);
@@ -131,8 +134,32 @@ function applyFilters() {
     return true;
   });
 
+  const sorted = sortRecords(filtered);
+
   const emptyMessage = allRecords.length > 0 ? "ไม่พบข้อมูลที่ตรงกับตัวกรอง" : "ยังไม่มีข้อมูล";
-  renderRecords(filtered, emptyMessage);
+  renderRecords(sorted, emptyMessage);
+}
+
+function sortRecords(records) {
+  if (!sortKey) return records;
+  const dir = sortDirection === "asc" ? 1 : -1;
+  return [...records].sort((a, b) => {
+    if (sortKey === "timestamp") {
+      return (new Date(a.timestamp) - new Date(b.timestamp)) * dir;
+    }
+    const valueA = String(a[sortKey] ?? "");
+    const valueB = String(b[sortKey] ?? "");
+    return valueA.localeCompare(valueB, "th") * dir;
+  });
+}
+
+function updateSortHeaders() {
+  sortableHeaders.forEach((th) => {
+    th.classList.remove("sort-asc", "sort-desc");
+    if (th.dataset.sort === sortKey) {
+      th.classList.add(sortDirection === "asc" ? "sort-asc" : "sort-desc");
+    }
+  });
 }
 
 function isConfigured() {
@@ -198,6 +225,20 @@ if (hasRecordsTable) {
     filterPlayer.value = "";
     filterRace.value = "";
     applyFilters();
+  });
+
+  sortableHeaders.forEach((th) => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.sort;
+      if (sortKey === key) {
+        sortDirection = sortDirection === "asc" ? "desc" : "asc";
+      } else {
+        sortKey = key;
+        sortDirection = "asc";
+      }
+      updateSortHeaders();
+      applyFilters();
+    });
   });
 }
 
