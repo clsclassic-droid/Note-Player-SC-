@@ -86,6 +86,10 @@ body {
   box-shadow: var(--shadow-elevate);
 }
 
+.card.wide {
+  max-width: 1000px;
+}
+
 #gate .card {
   text-align: center;
   width: 100%;
@@ -111,6 +115,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+header.wide {
+  max-width: 1000px;
 }
 
 header h1 {
@@ -268,7 +276,19 @@ th, td {
   text-align: left;
   padding: 12px 14px;
   border-bottom: 1px solid var(--line);
+}
+
+th {
   white-space: nowrap;
+}
+
+td {
+  white-space: normal;
+  word-break: break-word;
+}
+
+td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+  min-width: 160px;
 }
 
 th {
